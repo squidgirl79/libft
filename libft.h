@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 12:50:12 by embrugge          #+#    #+#             */
-/*   Updated: 2026/09/29 18:07:44 by embrugge         ###   ########.fr       */
+/*   Updated: 2026/09/30 14:47:53 by embrugge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 
+//		part 1
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -39,7 +40,12 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *nptr);
 
+//		malloc()
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
+
+//		part 2
+
+//		part 3
 
 #endif
