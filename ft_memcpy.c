@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
 /*   Created: 2026/09/30 17:07:53 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/09/30 17:14:50 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Updated: 2026/10/01 11:17:58 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	casted_src = (char *)src;
 	casted_dest = (char *)dest;
 	while (n--)
-	{
 		*casted_dest++ = *casted_src++;
-	}
 	return (dest);
 }

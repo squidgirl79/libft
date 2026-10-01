@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       .       42.fr        */
-/*   ft_memset.c                                        ":"                   */
+/*   ft_memmove.c                                       ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/09/30 17:37:13 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/01 11:19:33 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/01 09:54:18 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/01 10:42:56 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*casted_ptr;
+	char	*casted_dest;
+	char	*casted_src;
 
-	casted_ptr = s;
-	while (n--)
-		*casted_ptr++ = c;
-	return (s);
+	casted_dest = (char *)dest;
+	casted_src = (char *)src;
+	if (dest > src)
+		while (n--)
+			casted_dest[n] = casted_src[n];
+	else
+		ft_memcpy(dest, src, n);
+	return (dest);
 }
-//	line 20: add protection for negative n ??

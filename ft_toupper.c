@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       .       42.fr        */
-/*   ft_memset.c                                        ":"                   */
+/*   ft_toupper.c                                       ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/09/30 17:37:13 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/01 11:19:33 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/01 10:58:56 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/01 11:01:08 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_toupper(int c)
 {
-	char	*casted_ptr;
-
-	casted_ptr = s;
-	while (n--)
-		*casted_ptr++ = c;
-	return (s);
+	if (c >= 'a' && 'z' >= c)
+		c -= 32;
+	return (c);
 }
-//	line 20: add protection for negative n ??
+
+// move this later
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && 'Z' >= c)
+		c += 32;
+	return (c);
+}
