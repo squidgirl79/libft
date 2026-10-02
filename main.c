@@ -274,6 +274,8 @@ void	test_tolower(void)
 void	test_strchr_case(char *name, char *s, char c)
 {
 	printf("\nft_strchr: %s\n", name);
+	/*printf("WANT: %s\n", strchr(s, c));*/
+	/*printf("GOT:  %s\n", ft_strchr(s, c));*/
 	if (strchr(s, c))
 		printf("WANT: %s\n", strchr(s, c));
 	else
@@ -437,6 +439,58 @@ void	test_strdup(void)
 	test_strdup_case("");
 }
 
+void	test_substr_case(char *name, unsigned int start, size_t len)
+{
+	char	*s;
+
+	printf("\nft_substr: %s\n", name);
+	s = ft_substr(name, start, len);
+	printf("GOT:  %s\n", s);
+	free(s);
+}
+
+void	test_substr(void)
+{
+	test_substr_case("hello*world", 42, 4);
+	test_substr_case("hello*world", 'e', 1);
+	test_substr_case("hello*world", 42, 0);
+	test_substr_case("hello*world", 'o', 10);
+	test_substr_case("hello*world", 'x', 4);
+	test_substr_case("hello*world", 0, 4);
+	test_substr_case("", 42, 4);
+	test_substr_case("", 0, 4);
+}
+
+void	test_strjoin_case(char *name, char *s1, char *s2)
+{
+	char	*s;
+
+	printf("\nft_strjoin: %s\n", name);
+	s = ft_strjoin(s1, s2);
+	printf("GOT:  %s\n", s);
+	free(s);
+}
+
+void	test_strjoin(void)
+{
+	test_strjoin_case("1", "hello ", "world!");
+}
+
+void	test_strtrim_case(char *name, char *set)
+{
+	char	*s;
+
+	printf("\nft_strtrim: %s\n", name);
+	s = ft_strtrim(name, set);
+	printf("GOT:  %s\n", s);
+	free(s);
+}
+
+void	test_strtrim(void)
+{
+	test_strtrim_case("hello world!", "lrh !ed");
+}
+
 int	main(void)
 {
 	test_isalpha();
@@ -453,14 +507,18 @@ int	main(void)
 	/*test_strlcat();*/
 	test_toupper();
 	test_tolower();
-	test_strchr();
-	test_strrchr();
+	test_strchr(); // CANT RETURN NULL?
+	test_strrchr(); // CANT RETURN NULL?
 	test_strncmp();
 	/*test_memchr();*/
-	test_memcmp(); // NOT WORKING
+	/*test_memcmp(); // NOT WORKING*/
 	test_strnstr();
 	test_atoi();
 	test_calloc();
 	test_strdup();
+//	THE FOLLOWING CAN'T BE COMPARED
+	test_substr();
+	test_strjoin();
+	test_strtrim();
 	return (1);
 }
