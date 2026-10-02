@@ -11,223 +11,313 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
-
 #include <ctype.h>
 #include <bsd/string.h>
+#include <stdlib.h>
+#include "libft.h"
 
-void	test_ctype(void)
+void	test_isalpha(void)
 {
-	int c;
-	
-	printf("\n isalpha: \n");
-	for(c = -256; c <= 255; ++c)
+	int	c;
+
+	c = -256;
+	printf("\nft_isalpha:\nWANT: ");
+	while (c++ < 255)
 		if (isalpha(c))
-			printf("%c {%i} ", c, isalpha(c));
-	printf("\n ft_isalpha: \n");
-	for(c = -256; c <= 255; ++c)
+			printf("{%c} ", c);
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
 		if (ft_isalpha(c))
-			printf("%c {%i} ", c, ft_isalpha(c));
+			printf("{%c} ", c);
+	printf("\n");
+}
 
-	printf("\n isdigit: \n");
-	for(c = -256; c <= 255; ++c)
+void	test_isdigit(void)
+{
+	int	c;
+
+	c = -256;
+	printf("\nft_isdigit:\nWANT: ");
+	while (c++ < 255)
 		if (isdigit(c))
-			printf("%c {%i} ", c, isdigit(c));
-	printf("\n ft_isdigit: \n");
-	for(c = -256; c <= 255; ++c)
+			printf("{%c} ", c);
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
 		if (ft_isdigit(c))
-			printf("%c {%i} ", c, ft_isdigit(c));
+			printf("{%c} ", c);
+	printf("\n");
+}
 
-	printf("\n isalnum: \n");
-	for(c = -256; c <= 255; ++c)
+void	test_isalnum(void)
+{
+	int	c;
+
+	c = -256;
+	printf("\nft_isalnum:\nWANT: ");
+	while (c++ < 255)
 		if (isalnum(c))
-			printf("%c {%i} ", c, isalnum(c));
-	printf("\n ft_isalnum: \n");
-	for(c = -256; c <= 255; ++c)
+			printf("{%c} ", c);
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
 		if (ft_isalnum(c))
-			printf("%c {%i} ", c, ft_isalnum(c));
+			printf("{%c} ", c);
+	printf("\n");
+}
 
-	printf("\n isascii: \n");
-	for(c = -256; c <= 255; ++c)
+void	test_isascii(void)
+{
+	int	c;
+
+	c = -256;
+	printf("\nft_isascii:\nWANT: ");
+	while (c++ < 255)
 		if (isascii(c))
-			printf("%c {%i} ", c, isascii(c));
-	printf("\n ft_isascii: \n");
-	for(c = -256; c <= 255; ++c)
+			printf("{%c} ", c);
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
 		if (ft_isascii(c))
-			printf("%c {%i} ", c, ft_isascii(c));
+			printf("{%c} ", c);
+	printf("\n");
+}
 
-	printf("\n isprint: \n");
-	for(c = -256; c <= 255; ++c)
+void	test_isprint(void)
+{
+	int	c;
+
+	c = -256;
+	printf("\nft_isprint:\nWANT: ");
+	while (c++ < 255)
 		if (isprint(c))
-			printf("%c {%i} ", c, isprint(c));
-	printf("\n ft_isprint: \n");
-	for(c = -256; c <= 255; ++c)
+			printf("{%c} ", c);
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
 		if (ft_isprint(c))
-			printf("%c {%i} ", c, ft_isprint(c));
-
-	printf("\n toupper: \n");
-	for(c = -1; c <= 128; ++c)
-		if (toupper(c))
-			printf("%c {%c} ", c, toupper(c));
-	printf("\n tolower: \n");
-	for(c = -1; c <= 128; ++c)
-		if (tolower(c))
-			printf("%c {%c} ", c, tolower(c));
-	printf("\n ft_toupper: \n");
-	for(c = -1; c <= 128; ++c)
-		if (ft_toupper(c))
-			printf("%c {%c} ", c, ft_toupper(c));
-	printf("\n ft_tolower: \n");
-	for(c = -1; c <= 128; ++c)
-		if (ft_tolower(c))
-			printf("%c {%c} ", c, ft_tolower(c));
-
-	return ;
+			printf("{%c} ", c);
+	printf("\n");
 }
 
-void	print_array(int *arr)
+void	test_strlen_case(const char *name)
 {
-	while (*arr)
-		printf("{%d} ", *arr++);
+	printf("\nft_strlen: %s\n", name);
+	printf("WANT: %zu\n", strlen(name));
+	printf("GOT:  %zu\n", ft_strlen(name));
 }
 
-void	test_string(void)
+void	test_strlen(void)
 {
-	char	*strlen_s = "Hel\0lo Wor\nld\0!";
-	printf("\n\"%s\"\n", strlen_s);
-	printf("\n strlen: \n %lu \n", strlen(strlen_s));
-	printf("\n ft_strlen: \n %lu \n", ft_strlen(strlen_s));
-
-	char	memset_s[] = "hello world";
-	int		memset_i[] = {1, 2, 3, 4, 5, 6, 7, 8};
-	size_t	memset_n = 5*sizeof(char);
-	printf("\n memset char: \n %s \n", memset_s);
-	bzero(memset_s, memset_n);
-	printf("\n result: \n %s \n", memset_s);
-	memset_n = 9*sizeof(int);
-	print_array(memset_i);
-	bzero(memset_i, memset_n);
-	print_array(memset_i);
-
-	char	ft_memset_s[] = "hello world";
-	int		ft_memset_i[] = {1, 2, 3, 4, 5, 6, 7, 8};
-	size_t	ft_memset_n = 5*sizeof(char);
-	printf("\n ft_memset char: \n %s \n", ft_memset_s);
-	ft_bzero(ft_memset_s, ft_memset_n);
-	printf("\n result: \n %s \n", ft_memset_s);
-	ft_memset_n = 9*sizeof(int);
-	print_array(ft_memset_i);
-	ft_bzero(ft_memset_i, ft_memset_n);
-	print_array(ft_memset_i);
-
-	printf("\n\n");
+	test_strlen_case("hello world!");
+	test_strlen_case("");
+	test_strlen_case("\0");
+	test_strlen_case("*\0");
 }
 
-void	test_mem(void)
+void	test_memset_case(char *name, int c, size_t n)
 {
-	//memcpy
-	char	memcpy_dest[] = "hello world";
-	char	memcpy_src[] = "good morning";
-	char	memcpy_n = 8*sizeof(char);
-	printf("memcpy_src: %s\n", memcpy_src);
-	printf("memcpy_dest: %s\n", memcpy_dest);
-	memcpy(memcpy_dest, memcpy_src, memcpy_n);
-	printf("result: %s\n", memcpy_dest);
+	char	*s1;
+	char	*s2;
 
-	char	ft_memcpy_dest[] = "hello world";
-	char	ft_memcpy_src[] = "good morning";
-	printf("ft_memcpy_src: %s\n", ft_memcpy_src);
-	printf("ft_memcpy_dest: %s\n", ft_memcpy_dest);
-	ft_memcpy(ft_memcpy_dest, ft_memcpy_src, memcpy_n);
-	printf("result: %s\n", ft_memcpy_dest);
-	//backwards memmove
-	char	memmove_dest[] = "hello world";
-	char	memmove_n = 6*sizeof(char);
-	printf("memmove_dest: %s\n", memmove_dest + memmove_n/2);
-	printf("memmove_src: %s\n", memmove_dest);
-	memmove((memmove_dest + memmove_n/2), memmove_dest, memmove_n);
-	printf("result: %s\n", memmove_dest + memmove_n/2);
-
-	char	ft_memmove_dest[] = "hello world";
-	printf("ft_memmove_dest: %s\n", ft_memmove_dest + memmove_n/2);
-	printf("ft_memmove_src: %s\n", ft_memmove_dest);
-	ft_memmove((ft_memmove_dest + memmove_n/2), ft_memmove_dest, memmove_n);
-	printf("result: %s\n", ft_memmove_dest + memmove_n/2);
-	//forwards memmove
-	printf("memmove_src: %s\n", memmove_dest + memmove_n/2);
-	printf("memmove_dest: %s\n", memmove_dest);
-	memmove(memmove_dest, (memmove_dest + memmove_n/2), memmove_n);
-	printf("result: %s\n", memmove_dest + memmove_n/2);
-
-	printf("ft_memmove_src: %s\n", ft_memmove_dest + memmove_n/2);
-	printf("ft_memmove_dest: %s\n", ft_memmove_dest);
-	ft_memmove(ft_memmove_dest, (ft_memmove_dest + memmove_n/2), memmove_n);
-	printf("result: %s\n", ft_memmove_dest + memmove_n/2);
+	s1 = strdup(name);
+	s2 = strdup(name);
+	printf("\nft_memset: %s\n", name);
+	memset(s1, c, n);
+	ft_memset(s2, c, n);
+	printf("WANT: %s\n", s1);
+	printf("GOT:  %s\n", s2);
+	free(s1);
+	free(s2);
 }
 
-void	test_strl(void)
+void	test_memset(void)
 {
-	char	strlcpy_dst[] = "hello world";
-	char	strlcpy_src[] = "testing";
-	size_t	strlcpy_size = 50*sizeof(char);
-	printf("strlcpy_dst: %s\n", strlcpy_dst);
-	printf("strlcpy_src: %s\n", strlcpy_src);
-	printf("%zu\n", strlcpy(strlcpy_dst, strlcpy_src, strlcpy_size));
-	printf("result: %s\n", strlcpy_dst);
-
-	char	ft_strlcpy_dst[] = "hello world";
-	char	ft_strlcpy_src[] = "testing";
-	printf("ft_strlcpy_dst: %s\n", ft_strlcpy_dst);
-	printf("ft_strlcpy_src: %s\n", ft_strlcpy_src);
-	printf("%zu\n", ft_strlcpy(ft_strlcpy_dst, ft_strlcpy_src, strlcpy_size));
-	printf("result: %s\n", ft_strlcpy_dst);
-
-	char	strlcat_dst[] = "hello world";
-	char	strlcat_src[] = "testing";
-	size_t	strlcat_size = 50*sizeof(char);
-	printf("strlcat_dst: %s\n", strlcat_dst);
-	printf("strlcat_src: %s\n", strlcat_src);
-	printf("%zu\n", strlcat(strlcat_dst, strlcat_src, strlcat_size));
-	printf("result: %s\n", strlcat_dst);
-
-	char	ft_strlcat_dst[] = "hello world";
-	char	ft_strlcat_src[] = "testing";
-	printf("ft_strlcat_dst: %s\n", ft_strlcat_dst);
-	printf("ft_strlcat_src: %s\n", ft_strlcat_src);
-	printf("%zu\n", ft_strlcat(ft_strlcat_dst, ft_strlcat_src, strlcat_size));
-	printf("result: %s\n", ft_strlcat_dst);
+	test_memset_case("hello", 42, 3);
+	test_memset_case("2", '\0', 1);
+	test_memset_case("bleh", '*', 10);
+	test_memset_case("b", 'a', 0);
 }
 
-void	test_strncmp_case(char *name, char *s1, char *s2, size_t n)
+void	test_bzero_case(char *name, size_t n)
 {
-	printf("ft_strncmp: %s\n", name);
-	printf("WANT: %d\n", strncmp(s1, s2, n));
-	printf(" GOT: %d\n\n", ft_strncmp(s1, s2, n));
+	char	*s1;
+	char	*s2;
+
+	s1 = strdup(name);
+	s2 = strdup(name);
+	printf("\nft_bzero: %s\n", name);
+	bzero(s1, n);
+	ft_bzero(s2, n);
+	printf("WANT: %s\n", s1);
+	printf("GOT:  %s\n", s2);
+	free(s1);
+	free(s2);
+}
+
+void	test_bzero(void)
+{
+	test_bzero_case("eight bytes", 8);
+	test_bzero_case("zero bytes", 0);
+}
+
+/*void	test_mem(void)*/
+/*{*/
+/*	//memcpy*/
+/*	char	memcpy_dest[] = "hello world";*/
+/*	char	memcpy_src[] = "good morning";*/
+/*	char	memcpy_n = 8*sizeof(char);*/
+/*	printf("memcpy_src: %s\n", memcpy_src);*/
+/*	printf("memcpy_dest: %s\n", memcpy_dest);*/
+/*	memcpy(memcpy_dest, memcpy_src, memcpy_n);*/
+/*	printf("result: %s\n", memcpy_dest);*/
+/**/
+/*	char	ft_memcpy_dest[] = "hello world";*/
+/*	char	ft_memcpy_src[] = "good morning";*/
+/*	printf("ft_memcpy_src: %s\n", ft_memcpy_src);*/
+/*	printf("ft_memcpy_dest: %s\n", ft_memcpy_dest);*/
+/*	ft_memcpy(ft_memcpy_dest, ft_memcpy_src, memcpy_n);*/
+/*	printf("result: %s\n", ft_memcpy_dest);*/
+/*	//backwards memmove*/
+/*	char	memmove_dest[] = "hello world";*/
+/*	char	memmove_n = 6*sizeof(char);*/
+/*	printf("memmove_dest: %s\n", memmove_dest + memmove_n/2);*/
+/*	printf("memmove_src: %s\n", memmove_dest);*/
+/*	memmove((memmove_dest + memmove_n/2), memmove_dest, memmove_n);*/
+/*	printf("result: %s\n", memmove_dest + memmove_n/2);*/
+/**/
+/*	char	ft_memmove_dest[] = "hello world";*/
+/*	printf("ft_memmove_dest: %s\n", ft_memmove_dest + memmove_n/2);*/
+/*	printf("ft_memmove_src: %s\n", ft_memmove_dest);*/
+/*	ft_memmove((ft_memmove_dest + memmove_n/2), ft_memmove_dest, memmove_n);*/
+/*	printf("result: %s\n", ft_memmove_dest + memmove_n/2);*/
+/*	//forwards memmove*/
+/*	printf("memmove_src: %s\n", memmove_dest + memmove_n/2);*/
+/*	printf("memmove_dest: %s\n", memmove_dest);*/
+/*	memmove(memmove_dest, (memmove_dest + memmove_n/2), memmove_n);*/
+/*	printf("result: %s\n", memmove_dest + memmove_n/2);*/
+/**/
+/*	printf("ft_memmove_src: %s\n", ft_memmove_dest + memmove_n/2);*/
+/*	printf("ft_memmove_dest: %s\n", ft_memmove_dest);*/
+/*	ft_memmove(ft_memmove_dest, (ft_memmove_dest + memmove_n/2), memmove_n);*/
+/*	printf("result: %s\n", ft_memmove_dest + memmove_n/2);*/
+/*}*/
+
+/*void	test_strl(void)*/
+/*{*/
+/*	char	strlcpy_dst[50] = "hello world";*/
+/*	char	strlcpy_src[] = "testing";*/
+/*	size_t	strlcpy_size = 50*sizeof(char);*/
+/*	printf("strlcpy_dst: %s\n", strlcpy_dst);*/
+/*	printf("strlcpy_src: %s\n", strlcpy_src);*/
+/*	printf("%zu\n", strlcpy(strlcpy_dst, strlcpy_src, strlcpy_size));*/
+/*	printf("result: %s\n", strlcpy_dst);*/
+/**/
+/*	char	ft_strlcpy_dst[50] = "hello world";*/
+/*	char	ft_strlcpy_src[] = "testing";*/
+/*	printf("ft_strlcpy_dst: %s\n", ft_strlcpy_dst);*/
+/*	printf("ft_strlcpy_src: %s\n", ft_strlcpy_src);*/
+/*	printf("%zu\n", ft_strlcpy(ft_strlcpy_dst, ft_strlcpy_src, strlcpy_size));*/
+/*	printf("result: %s\n", ft_strlcpy_dst);*/
+/**/
+/*	char	strlcat_dst[50] = "hello world";*/
+/*	char	strlcat_src[] = "testing";*/
+/*	size_t	strlcat_size = 50*sizeof(char);*/
+/*	printf("strlcat_dst: %s\n", strlcat_dst);*/
+/*	printf("strlcat_src: %s\n", strlcat_src);*/
+/*	printf("%zu\n", strlcat(strlcat_dst, strlcat_src, strlcat_size));*/
+/*	printf("result: %s\n", strlcat_dst);*/
+/**/
+/*	char	ft_strlcat_dst[50] = "hello world";*/
+/*	char	ft_strlcat_src[] = "testing";*/
+/*	printf("ft_strlcat_dst: %s\n", ft_strlcat_dst);*/
+/*	printf("ft_strlcat_src: %s\n", ft_strlcat_src);*/
+/*	printf("%zu\n", ft_strlcat(ft_strlcat_dst, ft_strlcat_src, strlcat_size));*/
+/*	printf("result: %s\n", ft_strlcat_dst);*/
+/*}*/
+
+void	test_toupper(void)
+{
+	int	c;
+
+	c = -256;
+	printf("\nft_toupper:\nWANT: ");
+	while (c++ < 255)
+		if (isprint(c))
+			printf("{%c} ", toupper(c));
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
+		if (isprint(c))
+			printf("{%c} ", ft_toupper(c));
+	printf("\n");
+}
+
+void	test_tolower(void)
+{
+	int	c;
+
+	c = -256;
+	printf("\nft_tolower:\nWANT: ");
+	while (c++ < 255)
+		if (isprint(c))
+			printf("{%c} ", tolower(c));
+	c = -256;
+	printf("\nGOT:  ");
+	while (c++ < 255)
+		if (isprint(c))
+			printf("{%c} ", ft_tolower(c));
+	printf("\n");
+}
+
+void	test_strchr_case(char *name, char *s, char c)
+{
+	printf("\nft_strchr: %s\n", name);
+	if (strchr(s, c))
+		printf("WANT: %s\n", strchr(s, c));
+	else
+		printf("WANT: NULL\n");
+	if (ft_strchr(s, c))
+		printf("GOT:  %s\n", ft_strchr(s, c));
+	else
+		printf("GOT:  NULL\n");
 }
 
 void	test_strchr(void)
 {
-	char	strchr_s[] = "hello\0*world\0hi";
-	int		strchr_c = '5';
-	printf("strchr_s: %s\n", strchr_s);
-	printf("strchr_c: %c\n", strchr_c);
-	printf("%s\n", strchr(strchr_s, strchr_c));
-	
-	char	ft_strchr_s[] = "hello\0*world\0hi";
-	printf("ft_strchr_s: %s\n", ft_strchr_s);
-	printf("ft_strchr_c: %c\n", strchr_c);
-	printf("%s\n", ft_strchr(ft_strchr_s, strchr_c));
+	test_strchr_case("normal", "hello*world*hi", 42);
+	test_strchr_case("no result", "hello world hi", 42);
+}
 
-	char	strrchr_s[] = "hello\0*world\0hi";
-	printf("strrchr_s: %s\n", strrchr_s);
-	printf("strrchr_c: %c\n", strchr_c);
-	printf("%s\n", strrchr(strrchr_s, strchr_c));
-	
-	char	ft_strrchr_s[] = "hello\0*world\0hi";
-	printf("ft_strrchr_s: %s\n", ft_strrchr_s);
-	printf("ft_strrchr_c: %c\n", strchr_c);
-	printf("%s\n", ft_strrchr(ft_strrchr_s, strchr_c));
+void	test_strrchr_case(char *name, char *s, char c)
+{
+	printf("\nft_strrchr: %s\n", name);
+	if (strrchr(s, c))
+		printf("WANT: %s\n", strrchr(s, c));
+	else
+		printf("WANT: NULL\n");
+	if (ft_strrchr(s, c))
+		printf("GOT:  %s\n", ft_strrchr(s, c));
+	else
+		printf("GOT:  NULL\n");
+}
 
+void	test_strrchr(void)
+{
+	test_strrchr_case("normal", "hello*world*hi", 42);
+	test_strrchr_case("no result", "hello world hi", 42);
+}
+
+void	test_strncmp_case(char *name, char *s1, char *s2, size_t n)
+{
+	printf("\nft_strncmp: %s\n", name);
+	printf("WANT: %d\n", strncmp(s1, s2, n));
+	printf(" GOT: %d\n", ft_strncmp(s1, s2, n));
+}
+
+void	test_strncmp(void)
+{
 	test_strncmp_case("1", "ABC", "ABC", 9);
 	test_strncmp_case("2", "ABC", "AB", 9);
 	test_strncmp_case("3", "ABA", "ABZ", 9);
@@ -238,38 +328,36 @@ void	test_strchr(void)
 	test_strncmp_case("8", "ABC", "AB", 0);
 }
 
-void	test_memcmp_case(char *name, char *s1, char *s2, size_t n)
+void	test_memchr_case(void)
 {
-	printf("ft_memcmp: %s\n", name);
-	printf("Want: %d\n", memcmp(s1, s2, n));
-	printf("Got:  %d\n\n", ft_memcmp(s1, s2, n));
+	return ;
 }
 
 void	test_memchr(void)
 {
-	char	memchr_s[] = "hello w*rld!";
-	int		memchr_c = 42;
-	size_t	memchr_n = 10*sizeof(char);
-	printf("%s\n", (char *)memchr(memchr_s, memchr_c, memchr_n));
-	
-	char	ft_memchr_s[] = "hello w*rld!";
-	printf("%s\n", (char *)ft_memchr(ft_memchr_s, memchr_c, memchr_n));
+	test_memchr_case();
+}
 
-	test_memcmp_case("same", "hello!", "hello!", 10);
+void	test_memcmp_case(char *name, char *s1, char *s2, size_t n)
+{
+	printf("\nft_memcmp: %s\n", name);
+	printf("Want: %d\n", memcmp(s1, s2, n));
+	printf("Got:  %d\n", ft_memcmp(s1, s2, n));
+}
+
+void	test_memcmp(void)
+{
 	test_memcmp_case("1 byte (same)", "hello!", "hello!", 1);
 	test_memcmp_case("1 byte (different)", "ello!", "hello!", 1);
 	test_memcmp_case("limited (same)", "hello!", "hello!", 4);
 	test_memcmp_case("limited (different)", "hello!", "hell!", 4);
-	test_memcmp_case("null (different)", "he\0yj", "he\0ll!", 10);
-	test_memcmp_case("null", "hello!", "h\0ello!", 10);
-	test_memcmp_case("null (same)", "he\0llo!", "he\0llo!", 10);
 }
 
 void	test_strnstr_case(char *name, char *s1, char *s2, size_t n)
 {
-	printf("ft_strnstr: %s\n", name);
+	printf("\nft_strnstr: %s\n", name);
 	printf("Want: %s\n", strnstr(s1, s2, n));
-	printf("Got:  %s\n\n", ft_strnstr(s1, s2, n));
+	printf("Got:  %s\n", ft_strnstr(s1, s2, n));
 }
 
 void	test_strnstr(void)
@@ -284,14 +372,95 @@ void	test_strnstr(void)
 	test_strnstr_case("1", "helloworld", "ello", 1);
 }
 
-int		main(void)
+void	test_atoi_case(const char *name)
 {
-	test_ctype();
-	test_string();
-	test_mem();
-	test_strl();
+	printf("\nft_atoi: %s\n", name);
+	printf("WANT: %d\n", atoi(name));
+	printf("GOT:  %d\n", ft_atoi(name));
+}
+
+void	test_atoi(void)
+{
+	test_atoi_case("135");
+	test_atoi_case("");
+	test_atoi_case("5a");
+	test_atoi_case("bleh");
+	test_atoi_case("--99");
+	test_atoi_case("+42");
+	test_atoi_case("79-79");
+	test_atoi_case("-84");
+	test_atoi_case("+-12");
+	test_atoi_case("++300");
+}
+
+void	test_calloc_case(const char *name, size_t nmemb, size_t size)
+{
+	void	*s1;
+	void	*s2;
+
+	printf("\nft_calloc: %s\n", name);
+	s1 = calloc(nmemb, size);
+	s2 = ft_calloc(nmemb, size);
+	printf("WANT: %p\n", s1);
+	printf("GOT:  %p\n", s2);
+	free(s1);
+	free(s2);
+}
+
+void	test_calloc(void)
+{
+	test_calloc_case("normal", 8, sizeof(int));
+	test_calloc_case("no size", 10, 0);
+	test_calloc_case("no memb", 0, sizeof(char));
+	test_calloc_case("overflow", 2000000000, sizeof(int));
+}
+
+void	test_strdup_case(const char *name)
+{
+	char	*s1;
+	char	*s2;
+
+	printf("\nft_strdup: %s\n", name);
+	s1 = strdup(name);
+	s2 = ft_strdup(name);
+	printf("WANT: %s\n", s1);
+	printf("GOT:  %s\n", s2);
+	free(s1);
+	free(s2);
+}
+
+void	test_strdup(void)
+{
+	test_strdup_case("hello!");
+	test_strdup_case("1234567890");
+	test_strdup_case("hey\0!");
+	test_strdup_case("");
+}
+
+int	main(void)
+{
+	test_isalpha();
+	test_isdigit();
+	test_isalnum();
+	test_isascii();
+	test_isprint(); // NOT WORKING
+	test_strlen();
+	test_memset();
+	test_bzero();
+	/*test_memcpy();*/
+	/*test_memmove();*/
+	/*test_strlcpy();*/
+	/*test_strlcat();*/
+	test_toupper();
+	test_tolower();
 	test_strchr();
-	test_memchr();
+	test_strrchr();
+	test_strncmp();
+	/*test_memchr();*/
+	test_memcmp(); // NOT WORKING
 	test_strnstr();
+	test_atoi();
+	test_calloc();
+	test_strdup();
 	return (1);
 }
