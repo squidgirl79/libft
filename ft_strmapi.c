@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       .       42.fr        */
-/*   ft_atoi.c                                          ":"                   */
+/*   ft_strmapi.c                                       ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/10/02 12:19:17 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/04 16:26:33 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/04 23:07:44 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/04 23:07:44 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	result;
-	int	polarity;
+	char	*ret;
+	int		i;
 
-	result = 0;
-	polarity = 1;
-	if (*nptr == '+')
-		nptr++;
-	else if (*nptr == '-')
+	ret = (char *)ft_calloc((ft_strlen(s) + 1), sizeof(char));
+	if (!f || !ret)
 	{
-		polarity *= -1;
-		nptr++;
+		free (ret);
+		return (NULL);
 	}
-	while (ft_isdigit(*nptr))
+	i = 0;
+	while (*s)
 	{
-		result = (result * 10) + (*nptr - '0');
-		nptr++;
+		ret[i] = (*f)(i, *s);
+		s++;
+		i++;
 	}
-	return (result * polarity);
+	return (ret);
 }

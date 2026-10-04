@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       .       42.fr        */
+/*                                                       .     codam.nl       */
 /*   main.c                                             ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
 /*   Created: 2026/10/01 20:11:36 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/04 19:19:47 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Updated: 2026/10/04 19:19:47 by embrugge        ~     ~     ~     ~      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,47 +163,9 @@ void	test_bzero(void)
 	test_bzero_case("zero bytes", 0);
 }
 
-/*void	test_mem(void)*/
-/*{*/
-/*	//memcpy*/
-/*	char	memcpy_dest[] = "hello world";*/
-/*	char	memcpy_src[] = "good morning";*/
-/*	char	memcpy_n = 8*sizeof(char);*/
-/*	printf("memcpy_src: %s\n", memcpy_src);*/
-/*	printf("memcpy_dest: %s\n", memcpy_dest);*/
-/*	memcpy(memcpy_dest, memcpy_src, memcpy_n);*/
-/*	printf("result: %s\n", memcpy_dest);*/
-/**/
-/*	char	ft_memcpy_dest[] = "hello world";*/
-/*	char	ft_memcpy_src[] = "good morning";*/
-/*	printf("ft_memcpy_src: %s\n", ft_memcpy_src);*/
-/*	printf("ft_memcpy_dest: %s\n", ft_memcpy_dest);*/
-/*	ft_memcpy(ft_memcpy_dest, ft_memcpy_src, memcpy_n);*/
-/*	printf("result: %s\n", ft_memcpy_dest);*/
-/*	//backwards memmove*/
-/*	char	memmove_dest[] = "hello world";*/
-/*	char	memmove_n = 6*sizeof(char);*/
-/*	printf("memmove_dest: %s\n", memmove_dest + memmove_n/2);*/
-/*	printf("memmove_src: %s\n", memmove_dest);*/
-/*	memmove((memmove_dest + memmove_n/2), memmove_dest, memmove_n);*/
-/*	printf("result: %s\n", memmove_dest + memmove_n/2);*/
-/**/
-/*	char	ft_memmove_dest[] = "hello world";*/
-/*	printf("ft_memmove_dest: %s\n", ft_memmove_dest + memmove_n/2);*/
-/*	printf("ft_memmove_src: %s\n", ft_memmove_dest);*/
-/*	ft_memmove((ft_memmove_dest + memmove_n/2), ft_memmove_dest, memmove_n);*/
-/*	printf("result: %s\n", ft_memmove_dest + memmove_n/2);*/
-/*	//forwards memmove*/
-/*	printf("memmove_src: %s\n", memmove_dest + memmove_n/2);*/
-/*	printf("memmove_dest: %s\n", memmove_dest);*/
-/*	memmove(memmove_dest, (memmove_dest + memmove_n/2), memmove_n);*/
-/*	printf("result: %s\n", memmove_dest + memmove_n/2);*/
-/**/
-/*	printf("ft_memmove_src: %s\n", ft_memmove_dest + memmove_n/2);*/
-/*	printf("ft_memmove_dest: %s\n", ft_memmove_dest);*/
-/*	ft_memmove(ft_memmove_dest, (ft_memmove_dest + memmove_n/2), memmove_n);*/
-/*	printf("result: %s\n", ft_memmove_dest + memmove_n/2);*/
-/*}*/
+// memcpy
+
+// memmove
 
 void	test_strlcpy_case(char *name, char *dst, char *src, size_t size)
 {
@@ -294,14 +256,6 @@ void	test_strchr_case(char *name, char *s, char c)
 	printf("\nft_strchr: %s\n", name);
 	printf("WANT: %s\n", strchr(s, c));
 	printf("GOT:  %s\n", ft_strchr(s, c));
-	// if (strchr(s, c))
-	// 	printf("WANT: %s\n", strchr(s, c));
-	// else
-	// 	printf("WANT: NULL\n");
-	// if (ft_strchr(s, c))
-	// 	printf("GOT:  %s\n", ft_strchr(s, c));
-	// else
-	// 	printf("GOT:  NULL\n");
 }
 
 void	test_strchr(void)
@@ -315,14 +269,6 @@ void	test_strrchr_case(char *name, char *s, char c)
 	printf("\nft_strrchr: %s\n", name);
 	printf("WANT: %s\n", strrchr(s, c));
 	printf("GOT:  %s\n", ft_strrchr(s, c));
-	// if (strrchr(s, c))
-	// 	printf("WANT: %s\n", strrchr(s, c));
-	// else
-	// 	printf("WANT: NULL\n");
-	// if (ft_strrchr(s, c))
-	// 	printf("GOT:  %s\n", ft_strrchr(s, c));
-	// else
-	// 	printf("GOT:  NULL\n");
 }
 
 void	test_strrchr(void)
@@ -542,7 +488,7 @@ void	test_split_case(char *name, char c)
 	free(start);
 }
 
-void	test_split()
+void	test_split(void)
 {
 	test_split_case("hello*world", 42);
 	test_split_case("*hello*world*", 42);
@@ -580,7 +526,54 @@ void	test_itoa(void)
 	test_itoa_case(-456);
 }
 
-int	main()
+char	strmapi_f1(unsigned int i, char c)
+{
+	char	ret;
+
+	printf("^%d^", i);
+	ret = toupper(c);
+	return (ret);
+}
+
+char	strmapi_f2(unsigned int i, char c)
+{
+	char	ret;
+
+	printf("^%d^", i);
+	ret = tolower(c);
+	return (ret);
+}
+
+char	strmapi_f3(unsigned int i, char c)
+{
+	char	ret;
+
+	if (i % 2)
+		ret = tolower(c);
+	else
+		ret = toupper(c);
+	return (ret);
+}
+
+void	test_strmapi_case(char *name, char *s, char (*f)(unsigned int, char))
+{
+	char	*m;
+
+	printf("\nft_strmapi: %s\n", name);
+	m = ft_strmapi(s, f);
+	printf("GOT:  %s\n", m);
+	free(m);
+}
+
+void	test_strmapi(void)
+{
+	test_strmapi_case("apply toupper", "Hello World!", strmapi_f1);
+	test_strmapi_case("apply tolower", "Hello World!", strmapi_f2);
+	test_strmapi_case("empty function pointer", "Hello World!", 0);
+	test_strmapi_case("funny test", "QQQwwwEEErrrTTTyyy", strmapi_f3);
+}
+
+int	main(void)
 {
 	test_isalpha();
 	test_isdigit();
@@ -603,7 +596,7 @@ int	main()
 	// test_memcmp(); // NOT WORKING
 	test_strnstr();
 	test_atoi();
-	test_calloc(); // NOT WORKING
+	test_calloc();
 	test_strdup();
 //	THE FOLLOWING CAN'T BE COMPARED
 	test_substr(); // WRONG DEFINITION
@@ -611,5 +604,6 @@ int	main()
 	test_strtrim();
 	test_split(); // NOT NORM COMPLIANT
 	// test_itoa();
+	test_strmapi();
 	return (0);
 }
