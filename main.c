@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
 /*   Created: 2026/10/01 20:11:36 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/01 20:36:00 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Updated: 2026/10/04 19:19:47 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,9 @@ void	test_memset(void)
 {
 	test_memset_case("hello", 42, 3);
 	test_memset_case("2", '\0', 1);
-	test_memset_case("bleh", '*', 10);
+	test_memset_case("bleh", '*', 4);
 	test_memset_case("b", 'a', 0);
+	test_memset_case("wow", '*', 1);
 }
 
 void	test_bzero_case(char *name, size_t n)
@@ -204,38 +205,55 @@ void	test_bzero(void)
 /*	printf("result: %s\n", ft_memmove_dest + memmove_n/2);*/
 /*}*/
 
-/*void	test_strl(void)*/
-/*{*/
-/*	char	strlcpy_dst[50] = "hello world";*/
-/*	char	strlcpy_src[] = "testing";*/
-/*	size_t	strlcpy_size = 50*sizeof(char);*/
-/*	printf("strlcpy_dst: %s\n", strlcpy_dst);*/
-/*	printf("strlcpy_src: %s\n", strlcpy_src);*/
-/*	printf("%zu\n", strlcpy(strlcpy_dst, strlcpy_src, strlcpy_size));*/
-/*	printf("result: %s\n", strlcpy_dst);*/
-/**/
-/*	char	ft_strlcpy_dst[50] = "hello world";*/
-/*	char	ft_strlcpy_src[] = "testing";*/
-/*	printf("ft_strlcpy_dst: %s\n", ft_strlcpy_dst);*/
-/*	printf("ft_strlcpy_src: %s\n", ft_strlcpy_src);*/
-/*	printf("%zu\n", ft_strlcpy(ft_strlcpy_dst, ft_strlcpy_src, strlcpy_size));*/
-/*	printf("result: %s\n", ft_strlcpy_dst);*/
-/**/
-/*	char	strlcat_dst[50] = "hello world";*/
-/*	char	strlcat_src[] = "testing";*/
-/*	size_t	strlcat_size = 50*sizeof(char);*/
-/*	printf("strlcat_dst: %s\n", strlcat_dst);*/
-/*	printf("strlcat_src: %s\n", strlcat_src);*/
-/*	printf("%zu\n", strlcat(strlcat_dst, strlcat_src, strlcat_size));*/
-/*	printf("result: %s\n", strlcat_dst);*/
-/**/
-/*	char	ft_strlcat_dst[50] = "hello world";*/
-/*	char	ft_strlcat_src[] = "testing";*/
-/*	printf("ft_strlcat_dst: %s\n", ft_strlcat_dst);*/
-/*	printf("ft_strlcat_src: %s\n", ft_strlcat_src);*/
-/*	printf("%zu\n", ft_strlcat(ft_strlcat_dst, ft_strlcat_src, strlcat_size));*/
-/*	printf("result: %s\n", ft_strlcat_dst);*/
-/*}*/
+void	test_strlcpy_case(char *name, char *dst, char *src, size_t size)
+{
+	char	*dst1;
+	char	*dst2;
+
+	dst1 = calloc((size + 1), sizeof(char));
+	dst2 = calloc((size + 1), sizeof(char));
+	strncpy(dst1, dst, size);
+	strncpy(dst2, dst, size);
+	printf("\nft_strlcpy: %s\n", name);
+	printf("WANT: {%zu} %s\n", strlcpy(dst1, src, size), dst1);
+	printf("GOT:  {%zu} %s\n", ft_strlcpy(dst2, src, size), dst2);
+	free(dst1);
+	free(dst2);
+}
+
+// this doesnt work -vom (very helpful)
+void	test_strlcpy(void)
+{
+	test_strlcpy_case("hello", "hello", "world", 3);
+	test_strlcpy_case("hi\0     ", "hi\0     ", "hello", 5);
+	test_strlcpy_case("world", "world", "hello world", 6);
+	test_strlcpy_case("hi", "hi", "\0", 1);
+}
+
+void	test_strlcat_case(char *name, char *dst, char *src, size_t size)
+{
+	char	*dst1;
+	char	*dst2;
+
+	dst1 = calloc((size + 1), sizeof(char));
+	dst2 = calloc((size + 1), sizeof(char));
+	strncpy(dst1, dst, size);
+	strncpy(dst2, dst, size);
+	printf("\nft_strlcat: %s\n", name);
+	printf("WANT: {%zu} %s\n", strlcat(dst1, src, size), dst1);
+	printf("GOT:  {%zu} %s\n", ft_strlcat(dst2, src, size), dst2);
+	free(dst1);
+	free(dst2);
+}
+
+// this also doesn't work!!! be better next time. :)
+void	test_strlcat(void)
+{
+	test_strlcat_case("hello\0     ", "hello\0     ", "world", 3);
+	test_strlcat_case("hi\0     ", "hi\0     ", "hello", 5);
+	test_strlcat_case("world\0   ", "world\0   ", "hello world", 6);
+	test_strlcat_case("hi", "hi", "\0", 1);
+}
 
 void	test_toupper(void)
 {
@@ -274,16 +292,16 @@ void	test_tolower(void)
 void	test_strchr_case(char *name, char *s, char c)
 {
 	printf("\nft_strchr: %s\n", name);
-	/*printf("WANT: %s\n", strchr(s, c));*/
-	/*printf("GOT:  %s\n", ft_strchr(s, c));*/
-	if (strchr(s, c))
-		printf("WANT: %s\n", strchr(s, c));
-	else
-		printf("WANT: NULL\n");
-	if (ft_strchr(s, c))
-		printf("GOT:  %s\n", ft_strchr(s, c));
-	else
-		printf("GOT:  NULL\n");
+	printf("WANT: %s\n", strchr(s, c));
+	printf("GOT:  %s\n", ft_strchr(s, c));
+	// if (strchr(s, c))
+	// 	printf("WANT: %s\n", strchr(s, c));
+	// else
+	// 	printf("WANT: NULL\n");
+	// if (ft_strchr(s, c))
+	// 	printf("GOT:  %s\n", ft_strchr(s, c));
+	// else
+	// 	printf("GOT:  NULL\n");
 }
 
 void	test_strchr(void)
@@ -295,14 +313,16 @@ void	test_strchr(void)
 void	test_strrchr_case(char *name, char *s, char c)
 {
 	printf("\nft_strrchr: %s\n", name);
-	if (strrchr(s, c))
-		printf("WANT: %s\n", strrchr(s, c));
-	else
-		printf("WANT: NULL\n");
-	if (ft_strrchr(s, c))
-		printf("GOT:  %s\n", ft_strrchr(s, c));
-	else
-		printf("GOT:  NULL\n");
+	printf("WANT: %s\n", strrchr(s, c));
+	printf("GOT:  %s\n", ft_strrchr(s, c));
+	// if (strrchr(s, c))
+	// 	printf("WANT: %s\n", strrchr(s, c));
+	// else
+	// 	printf("WANT: NULL\n");
+	// if (ft_strrchr(s, c))
+	// 	printf("GOT:  %s\n", ft_strrchr(s, c));
+	// else
+	// 	printf("GOT:  NULL\n");
 }
 
 void	test_strrchr(void)
@@ -315,7 +335,7 @@ void	test_strncmp_case(char *name, char *s1, char *s2, size_t n)
 {
 	printf("\nft_strncmp: %s\n", name);
 	printf("WANT: %d\n", strncmp(s1, s2, n));
-	printf(" GOT: %d\n", ft_strncmp(s1, s2, n));
+	printf("GOT:  %d\n", ft_strncmp(s1, s2, n));
 }
 
 void	test_strncmp(void)
@@ -330,6 +350,7 @@ void	test_strncmp(void)
 	test_strncmp_case("8", "ABC", "AB", 0);
 }
 
+// wow so cool
 void	test_memchr_case(void)
 {
 	return ;
@@ -358,8 +379,8 @@ void	test_memcmp(void)
 void	test_strnstr_case(char *name, char *s1, char *s2, size_t n)
 {
 	printf("\nft_strnstr: %s\n", name);
-	printf("Want: %s\n", strnstr(s1, s2, n));
-	printf("Got:  %s\n", ft_strnstr(s1, s2, n));
+	printf("WANT: %s\n", strnstr(s1, s2, n));
+	printf("GOT:  %s\n", ft_strnstr(s1, s2, n));
 }
 
 void	test_strnstr(void)
@@ -414,7 +435,7 @@ void	test_calloc(void)
 	test_calloc_case("normal", 8, sizeof(int));
 	test_calloc_case("no size", 10, 0);
 	test_calloc_case("no memb", 0, sizeof(char));
-	test_calloc_case("overflow", 2000000000, sizeof(int));
+	test_calloc_case("overflow", __SIZE_MAX__, sizeof(int));
 }
 
 void	test_strdup_case(const char *name)
@@ -488,37 +509,107 @@ void	test_strtrim_case(char *name, char *set)
 
 void	test_strtrim(void)
 {
-	test_strtrim_case("hello world!", "lrh !ed");
+	test_strtrim_case(" ! ! hello worl!d! ! ! ", "! ");
+	test_strtrim_case(" ! ! hello worl!d! ! ! ", "!");
+	test_strtrim_case(" ! ! hello worl!d! ! ! ", " ");
+	test_strtrim_case(" ! ! hello worl!d! ! ! ", "");
+	test_strtrim_case("", "*");
+	test_strtrim_case("*", "");
+	test_strtrim_case("", "");
+	test_strtrim_case("*", "*");
+	test_strtrim_case("123", "321");
+	test_strtrim_case("-+-=-+-", "=");
+	test_strtrim_case("-+-=-+-", "+-");
+	test_strtrim_case("-+-=-+-", "-");
 }
 
-int	main(void)
+void	test_split_case(char *name, char c)
+{
+	char	**s;
+	char	**start;
+
+	printf("\nft_split: %s\n", name);
+	s = ft_split(name, c);
+	printf("GOT:  ");
+	start = s;
+	while (*s)
+	{
+		printf("{%s} ", *s);
+		free(*s);
+		s++;
+	}
+	printf("\n");
+	free(start);
+}
+
+void	test_split()
+{
+	test_split_case("hello*world", 42);
+	test_split_case("*hello*world*", 42);
+	test_split_case("*hello*world", 42);
+	test_split_case("hello*world*", 42);
+	test_split_case("1*2", 42);
+	test_split_case("*1*2*", 42);
+	test_split_case("*1*2", 42);
+	test_split_case("1*2*", 42);
+	test_split_case("hello**world", 5);
+	test_split_case("*hello**world*", 5);
+	test_split_case("*hello***world", 5);
+	test_split_case("hello***world*", 5);
+	test_split_case("", 42);
+	test_split_case("", 0);
+	test_split_case("*1***2**", 42);
+	test_split_case("**1**2***", 42);
+}
+
+void	test_itoa_case(int n)
+{
+	char	*s;
+
+	printf("\nft_itoa: %d\n", n);
+	s = ft_itoa(n);
+	printf("GOT:  %s\n", s);
+	free(s);
+}
+
+void	test_itoa(void)
+{
+	test_itoa_case(42);
+	test_itoa_case(0);
+	test_itoa_case(-0);
+	test_itoa_case(-456);
+}
+
+int	main()
 {
 	test_isalpha();
 	test_isdigit();
 	test_isalnum();
 	test_isascii();
-	test_isprint(); // NOT WORKING
+	test_isprint();
 	test_strlen();
-	test_memset();
+	test_memset(); // UNSURE ABOUT TESTERS FOR MEM FUNCTIONS
 	test_bzero();
-	/*test_memcpy();*/
-	/*test_memmove();*/
-	/*test_strlcpy();*/
-	/*test_strlcat();*/
+	// test_memcpy();
+	// test_memmove();
+	test_strlcpy();
+	test_strlcat();
 	test_toupper();
 	test_tolower();
 	test_strchr(); // CANT RETURN NULL?
 	test_strrchr(); // CANT RETURN NULL?
 	test_strncmp();
-	/*test_memchr();*/
-	/*test_memcmp(); // NOT WORKING*/
+	// test_memchr();
+	// test_memcmp(); // NOT WORKING
 	test_strnstr();
 	test_atoi();
-	test_calloc();
+	test_calloc(); // NOT WORKING
 	test_strdup();
 //	THE FOLLOWING CAN'T BE COMPARED
-	test_substr();
+	test_substr(); // WRONG DEFINITION
 	test_strjoin();
 	test_strtrim();
-	return (1);
+	test_split(); // NOT NORM COMPLIANT
+	// test_itoa();
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
 /*   Created: 2026/10/01 10:45:59 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/01 16:21:36 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Updated: 2026/10/04 17:07:20 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	size_t	result;
 
 	result = ft_strlen(src);
+	if (!size)
+		return (result);
 	while (size-- - 1 && *src)
 		*dst++ = *src++;
 	*dst = '\0';

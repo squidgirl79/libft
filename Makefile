@@ -1,17 +1,16 @@
-SRC=ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strtrim.c ft_substr.c ft_toupper.c main.c
+SRC=ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strtrim.c ft_substr.c ft_toupper.c
 
+NAME=libft.a
 OBJ=$(SRC:.c=.o)
 
-CPPFLAGS=-Wall -Wextra -Werror
-CFLAGS=-O3
+CFLAGS=-g -Wall -Wextra -Werror
 LDFLAGS=-lbsd
 
 %.o: %.c libft.h
-	cc $< -c $(CPPFLAGS) $(CFLAGS) -o $@
-%.o: %.c
+	cc $< -c $(CFLAGS) -o $@
 
-test: $(OBJ)
-	cc $(OBJ) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+test: $(OBJ) main.c
+	cc $(OBJ) main.c $(CFLAGS) $(LDFLAGS) -o $@
 
 run: test
 	./test

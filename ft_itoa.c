@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       .       42.fr        */
-/*   ft_strtrim.c                                       ":"                   */
+/*   ft_itoa.c                                          ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/10/03 12:22:00 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/03 13:18:41 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/04 14:04:11 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/04 14:14:58 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stdio.h>
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_itoa(int n)
 {
-	char	*result;
-	size_t	len;
-
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	len = ft_strlen(s1);
-	while (*s1 && ft_strchr(set, s1[len - 1]))
-		len--;
-	result = (char *)malloc(len + 1);
-	if (!result)
-		return (NULL);
-	ft_strlcpy(result, s1, len + 1);
-	return (result);
+	if (n < 10)
+		printf("^%c^", (n % 10) + 48);
+	else
+		ft_itoa(n / 10);
+	return ("0");
 }

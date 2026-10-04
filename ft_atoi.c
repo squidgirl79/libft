@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
 /*   Created: 2026/10/02 12:19:17 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/02 12:19:17 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Updated: 2026/10/04 16:26:33 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	ft_atoi(const char *nptr)
 	}
 	while (ft_isdigit(*nptr))
 	{
-		result = (result * 10) + (*nptr - 48);
+		result = (result * 10) + (*nptr - '0');
+		// result *= 10; 
+		// result += *nptr & 0xF;
+		// result += *nptr - 48;
 		nptr++;
 	}
 	return (result * polarity);
