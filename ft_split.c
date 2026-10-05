@@ -16,26 +16,23 @@
 
 static size_t	wordlen(char const *s, char c);
 
+static int		loop_s(char const *s, char c, int i);
+
 char	**ft_split(char const *s, char c)
 {
-	const char	*start = s;
 	char		**result;
 	int			i;
 
 	i = 0;
-	while (*s)
-	{
-		if (wordlen(s, c))
-			i++;
-		s += wordlen(s, c) + 1;
-	}
+	i = loop_s(s, c, i);
 	result = (char **)malloc((i + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	s = start;
 	i = 0;
 	while (*s)
 	{
+		while (*s == c)
+			s++;
 		if (wordlen(s, c))
 		{
 			result[i] = (char *)malloc((wordlen(s, c) + 1) * sizeof(char));
@@ -43,10 +40,23 @@ char	**ft_split(char const *s, char c)
 				return (NULL);
 			ft_strlcpy(result[i++], s, wordlen(s, c) + 1);
 		}
-		s += wordlen(s, c) + 1;
+		s += wordlen(s, c);
 	}
 	result[i] = NULL;
 	return (result);
+}
+
+static int	loop_s(char const *s, char c, int i)
+{
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (wordlen(s, c))
+			i++;
+		s += wordlen(s, c);
+	}
+	return (i);
 }
 
 static size_t	wordlen(char const *s, char c)

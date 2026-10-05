@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
 /*   Created: 2026/10/01 20:11:36 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/04 19:19:47 by embrugge        ~     ~     ~     ~      */
+/*   Updated: 2026/10/05 16:56:54 by embrugge         ~     ~     ~     ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <ctype.h>
 #include <bsd/string.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include "libft.h"
 
 void	test_isalpha(void)
@@ -498,10 +500,10 @@ void	test_split(void)
 	test_split_case("*1*2*", 42);
 	test_split_case("*1*2", 42);
 	test_split_case("1*2*", 42);
-	test_split_case("hello**world", 5);
-	test_split_case("*hello**world*", 5);
-	test_split_case("*hello***world", 5);
-	test_split_case("hello***world*", 5);
+	test_split_case("hello**world", 42);
+	test_split_case("*hello**world*", 42);
+	test_split_case("*hello***world", 42);
+	test_split_case("hello***world*", 42);
 	test_split_case("", 42);
 	test_split_case("", 0);
 	test_split_case("*1***2**", 42);
@@ -524,6 +526,8 @@ void	test_itoa(void)
 	test_itoa_case(0);
 	test_itoa_case(-0);
 	test_itoa_case(-456);
+	test_itoa_case(INT_MAX);
+	test_itoa_case(INT_MIN);
 }
 
 char	strmapi_f1(unsigned int i, char c)
@@ -560,17 +564,158 @@ void	test_strmapi_case(char *name, char *s, char (*f)(unsigned int, char))
 	char	*m;
 
 	printf("\nft_strmapi: %s\n", name);
+	printf("GOT:  ");
 	m = ft_strmapi(s, f);
-	printf("GOT:  %s\n", m);
+	printf("%s\n", m);
 	free(m);
 }
 
 void	test_strmapi(void)
 {
 	test_strmapi_case("apply toupper", "Hello World!", strmapi_f1);
-	test_strmapi_case("apply tolower", "Hello World!", strmapi_f2);
+	test_strmapi_case("apply tolower", NULL, strmapi_f2);
 	test_strmapi_case("empty function pointer", "Hello World!", 0);
 	test_strmapi_case("funny test", "QQQwwwEEErrrTTTyyy", strmapi_f3);
+}
+
+void	striteri_f1(unsigned int i, char *c)
+{
+	printf("^%d^", i);
+	*c = toupper(*c);
+}
+
+void	striteri_f2(unsigned int i, char *c)
+{
+	printf("^%d^", i);
+	*c = tolower(*c);
+}
+
+void	striteri_f3(unsigned int i, char *c)
+{
+	if (i % 2)
+		*c = tolower(*c);
+	else
+		*c = toupper(*c);
+}
+
+void	test_striteri_case(char *name, char *s, void (*f)(unsigned int, char*))
+{
+	char	*i;
+
+	i = NULL;
+	if (s)
+		i = strdup(s);
+	printf("\nft_striteri: %s\n", name);
+	printf("GOT:  ");
+	ft_striteri(i, f);
+	printf("%s\n", i);
+	free(i);
+}
+
+void	test_striteri(void)
+{
+	test_striteri_case("apply toupper", "Hello World!", striteri_f1);
+	test_striteri_case("apply tolower", NULL, striteri_f2);
+	test_striteri_case("empty function pointer", "Hello World!", 0);
+	test_striteri_case("funny test", "QQQwwwEEErrrTTTyyy", striteri_f3);
+}
+
+void	test_putchar_fd_case(char *name, char c, char *file)
+{
+	int	fd;
+
+	fd = 1;
+	if (file)
+		fd = open(file, O_RDWR);
+	printf("\nft_putchar_fd: %s\n", name);
+	printf("GOT:  \n");
+	ft_putchar_fd(c, fd);
+	if (fd != 1)
+		close(fd);
+	printf("\n");
+}
+
+void	test_putchar_fd(void)
+{
+	test_putchar_fd_case("1", '*', "output.txt");
+	test_putchar_fd_case("2", 'c', NULL);
+	test_putchar_fd_case("3", '2', NULL);
+	test_putchar_fd_case("4", '?', NULL);
+}
+
+void	test_putstr_fd_case(char *name, char *c, char *file)
+{
+	int	fd;
+
+	fd = 1;
+	if (file)
+		fd = open(file, O_RDWR);
+	printf("\nft_putstr_fd: %s\n", name);
+	printf("GOT:  \n");
+	ft_putstr_fd(c, fd);
+	if (fd != 1)
+		close(fd);
+	printf("\n");
+}
+
+void	test_putstr_fd(void)
+{
+	test_putstr_fd_case("1", "hello world", "output.txt");
+	test_putstr_fd_case("2", "test hi", NULL);
+	test_putstr_fd_case("3", "blehh blehh", NULL);
+	test_putstr_fd_case("4", "?????", NULL);
+}
+
+void	test_putendl_fd_case(char *name, char *c, char *file)
+{
+	int	fd;
+
+	fd = 1;
+	if (file)
+		fd = open(file, O_RDWR);
+	printf("\nft_putendl_fd: %s\n", name);
+	printf("GOT:  \n");
+	ft_putendl_fd(c, fd);
+	if (fd != 1)
+		close(fd);
+	printf("\n");
+}
+
+void	test_putendl_fd(void)
+{
+	test_putendl_fd_case("1", "hello world", "output.txt");
+	test_putendl_fd_case("2", "test hi", NULL);
+	test_putendl_fd_case("3", "blehh blehh", NULL);
+	test_putendl_fd_case("4", "?????", NULL);
+}
+
+void	test_putnbr_fd_case(char *name, int n, char *file)
+{
+	int	fd;
+
+	fd = 1;
+	if (file)
+		fd = open(file, O_RDWR);
+	printf("\nft_putnbr_fd: %s\n", name);
+	printf("GOT:  \n");
+	ft_putnbr_fd(n, fd);
+	if (fd != 1)
+		close(fd);
+	printf("\n");
+}
+
+void	test_putnbr_fd(void)
+{
+	test_putnbr_fd_case("87953", 87953, "output.txt");
+	test_putnbr_fd_case("-496", -496, NULL);
+	test_putnbr_fd_case("-0", -0, NULL);
+	test_putnbr_fd_case("0", 0, NULL);
+	test_putnbr_fd_case("int max", INT_MAX, NULL);
+	test_putnbr_fd_case("int min", INT_MIN, NULL);
+	test_putnbr_fd_case("03764", 03764, NULL); // ?????
+	test_putnbr_fd_case("64643", 64643, NULL);
+	test_putnbr_fd_case("-654623", -654623, NULL);
+	test_putnbr_fd_case("-00623", -00623, NULL);
 }
 
 int	main(void)
@@ -581,7 +726,7 @@ int	main(void)
 	test_isascii();
 	test_isprint();
 	test_strlen();
-	test_memset(); // UNSURE ABOUT TESTERS FOR MEM FUNCTIONS
+	test_memset(); // i dont know how to test mem functions
 	test_bzero();
 	// test_memcpy();
 	// test_memmove();
@@ -589,21 +734,26 @@ int	main(void)
 	test_strlcat();
 	test_toupper();
 	test_tolower();
-	test_strchr(); // CANT RETURN NULL?
-	test_strrchr(); // CANT RETURN NULL?
+	test_strchr(); // confused about return null
+	test_strrchr(); // confused about return null
 	test_strncmp();
 	// test_memchr();
-	// test_memcmp(); // NOT WORKING
+	// test_memcmp(); // not working (i think)
 	test_strnstr();
 	test_atoi();
 	test_calloc();
 	test_strdup();
-//	THE FOLLOWING CAN'T BE COMPARED
-	test_substr(); // WRONG DEFINITION
+
+	test_substr();
 	test_strjoin();
 	test_strtrim();
-	test_split(); // NOT NORM COMPLIANT
-	// test_itoa();
+	test_split(); // needs to free in case of error
+	test_itoa();
 	test_strmapi();
+	test_striteri();
+	test_putchar_fd();
+	test_putstr_fd();
+	test_putendl_fd();
+	test_putnbr_fd();
 	return (0);
 }

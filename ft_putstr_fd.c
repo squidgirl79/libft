@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       .       42.fr        */
-/*   ft_toupper.c                                       ":"                   */
+/*                                                       .     codam.nl       */
+/*   ft_putstr_fd.c                                     ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/10/01 10:58:56 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/05 11:24:04 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/05 15:53:11 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/05 15:58:05 by embrugge         ~     ~     ~     ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (c >= 'a' && 'z' >= c)
-		c -= 32;
-	return (c);
-}
-
-// move this later
-int	ft_tolower(int c)
-{
-	if (c >= 'A' && 'Z' >= c)
-		c += 32;
-	return (c);
+	while (*s)
+	{
+		ft_putchar_fd(*s, fd);
+		s++;
+	}
 }

@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       .       42.fr        */
-/*   ft_strmapi.c                                       ":"                   */
+/*   ft_striteri.c                                      ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/10/04 23:07:44 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/05 11:04:37 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/05 11:05:23 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/05 11:25:56 by embrugge       ~   ~   ~   ~   ~   ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*ret;
-	int		i;
+	unsigned int	i;
 
-	if (!s)
-		return (NULL);
-	ret = (char *)ft_calloc((ft_strlen(s) + 1), sizeof(char));
-	if (!f || !ret)
-	{
-		free (ret);
-		return (NULL);
-	}
+	if (!s || !f)
+		return ;
 	i = 0;
 	while (*s)
 	{
-		ret[i] = (*f)(i, *s);
+		(*f)(i, s);
 		s++;
 		i++;
 	}
-	return (ret);
 }

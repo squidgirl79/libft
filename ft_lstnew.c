@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       .       42.fr        */
-/*   ft_strmapi.c                                       ":"                   */
+/*                                                       .     codam.nl       */
+/*   ft_lstnew.c                                        ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  O        \___/  |      */
-/*   Created: 2026/10/04 23:07:44 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/05 11:04:37 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Created: 2026/10/05 17:24:50 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/05 17:43:29 by embrugge         ~     ~     ~     ~     */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+t_list	*ft_lstnew(void *content)
 {
-	char	*ret;
-	int		i;
-
-	if (!s)
+	t_list	*ret;
+	ret = malloc(sizeof(t_list));
+	if (!ret)
 		return (NULL);
-	ret = (char *)ft_calloc((ft_strlen(s) + 1), sizeof(char));
-	if (!f || !ret)
-	{
-		free (ret);
-		return (NULL);
-	}
-	i = 0;
-	while (*s)
-	{
-		ret[i] = (*f)(i, *s);
-		s++;
-		i++;
-	}
+	ret->content = content;
+	ret->next = NULL;
 	return (ret);
+}
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	
 }
