@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       .     codam.nl       */
-/*   ft_lstnew.c                                        ":"                   */
+/*   ft_lstsize.c                                       ":"                   */
 /*                                                    ___:____     |"\/"|     */
-/*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
+/*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \   /     */
 /*                                                  |  v~       \___/  |      */
-/*   Created: 2026/10/05 17:24:50 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/06 16:07:27 by embrugge        ~       ~       ~        */
+/*   Created: 2026/10/06 14:48:32 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/06 20:07:23 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*ret;
+	int	ret;
 
-	ret = malloc(sizeof(t_list));
-	if (!ret)
-		return (NULL);
-	ret->content = content;
-	ret->next = NULL;
+	ret = 1;
+	while (lst->next)2
+	{
+		ret++;
+		lst = lst->next;
+	}
 	return (ret);
 }

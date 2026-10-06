@@ -4,9 +4,9 @@
 /*   main.c                                             ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
-/*                                                  |  O        \___/  |      */
+/*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/01 20:11:36 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/05 16:56:54 by embrugge         ~     ~     ~     ~     */
+/*   Updated: 2026/10/06 18:46:41 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "libft.h"
+
+void	test_lst(void);
 
 void	test_isalpha(void)
 {
@@ -165,9 +167,105 @@ void	test_bzero(void)
 	test_bzero_case("zero bytes", 0);
 }
 
-// memcpy
+void	test_memcpy_case(char *dest, size_t n, int offset)
+{
+	char	*m1;
+	char	*m2;
+	char	*m3;
+	char	*m4;
 
-// memmove
+	m1 = strdup(dest);
+	m2 = strdup(dest);
+	m3 = m1;
+	m4 = m2;
+	if (offset > 0)
+	{
+		m3 += offset;
+		m4 += offset;
+	}
+	if (offset < 0)
+	{
+		m1 -= offset;
+		m2 -= offset;
+	}
+	printf("\nft_memcpy: %s\n", dest);
+	memcpy(m1, m3, n);
+	ft_memcpy(m2, m4, n);
+	printf("WANT: %s\n", m1);
+	printf("WANT: %s\n", m3);
+	printf("GOT:  %s\n", m2);
+	printf("GOT:  %s\n", m4);
+	if (offset > 0)
+	{
+		free(m1);
+		free(m2);
+	}
+	if (offset < 0)
+	{
+		free(m3);
+		free(m4);
+	}
+}
+
+void	test_memcpy(void)
+{
+	test_memcpy_case("hello world!", 4, 2);
+	test_memcpy_case("hello world!", 4, -2);
+	test_memcpy_case("bleh....", 4, 2);
+	test_memcpy_case("bleh....", 4, -2);
+	test_memcpy_case("abcdefghijk", 5, 3);
+	test_memcpy_case("abcdefghijk", 5, -3);
+}
+
+void	test_memmove_case(char *dest, size_t n, int offset)
+{
+	char	*m1;
+	char	*m2;
+	char	*m3;
+	char	*m4;
+
+	m1 = strdup(dest);
+	m2 = strdup(dest);
+	m3 = m1;
+	m4 = m2;
+	if (offset > 0)
+	{
+		m3 += offset;
+		m4 += offset;
+	}
+	if (offset < 0)
+	{
+		m1 -= offset;
+		m2 -= offset;
+	}
+	printf("\nft_memmove: %s\n", dest);
+	memmove(m1, m3, n);
+	ft_memmove(m2, m4, n);
+	printf("WANT: %s\n", m1);
+	printf("WANT: %s\n", m3);
+	printf("GOT:  %s\n", m2);
+	printf("GOT:  %s\n", m4);
+	if (offset > 0)
+	{
+		free(m1);
+		free(m2);
+	}
+	if (offset < 0)
+	{
+		free(m3);
+		free(m4);
+	}
+}
+
+void	test_memmove(void)
+{
+	test_memmove_case("hello world!", 4, 2);
+	test_memmove_case("hello world!", 4, -2);
+	test_memmove_case("bleh....", 4, 2);
+	test_memmove_case("bleh....", 4, -2);
+	test_memmove_case("abcdefghijk", 5, 3);
+	test_memmove_case("abcdefghijk", 5, -3);
+}
 
 void	test_strlcpy_case(char *name, char *dst, char *src, size_t size)
 {
@@ -298,15 +396,19 @@ void	test_strncmp(void)
 	test_strncmp_case("8", "ABC", "AB", 0);
 }
 
-// wow so cool
-void	test_memchr_case(void)
+void	test_memchr_case(char *name, char *s, char c, size_t n)
 {
-	return ;
+	printf("\nft_memchr: %s\n", name);
+	printf("WANT: %s\n", (char *)memchr(s, c, n));
+	printf("GOT:  %s\n", (char *)ft_memchr(s, c, n));
 }
 
 void	test_memchr(void)
 {
-	test_memchr_case();
+	test_memchr_case("normal", "hello*world*hi", 42, 99);
+	test_memchr_case("no result", "hello world hi", 42, 99);
+	test_memchr_case("limited not found", "hello*world*hi", 42, 5);
+	test_memchr_case("limited", "hello*world*hi", 42, 7);
 }
 
 void	test_memcmp_case(char *name, char *s1, char *s2, size_t n)
@@ -322,6 +424,14 @@ void	test_memcmp(void)
 	test_memcmp_case("1 byte (different)", "ello!", "hello!", 1);
 	test_memcmp_case("limited (same)", "hello!", "hello!", 4);
 	test_memcmp_case("limited (different)", "hello!", "hell!", 4);
+	test_memcmp_case("1", "ABC", "ABC", 9);
+	test_memcmp_case("2", "ABC", "AB", 9);
+	test_memcmp_case("3", "ABA", "ABZ", 9);
+	test_memcmp_case("4", "ABJ", "ABC", 9);
+	test_memcmp_case("5", "\201", "A", 9);
+	test_memcmp_case("6", "ABC", "AB", 3);
+	test_memcmp_case("7", "ABC", "AB", 2);
+	test_memcmp_case("8", "ABC", "AB", 0);
 }
 
 void	test_strnstr_case(char *name, char *s1, char *s2, size_t n)
@@ -712,48 +822,50 @@ void	test_putnbr_fd(void)
 	test_putnbr_fd_case("0", 0, NULL);
 	test_putnbr_fd_case("int max", INT_MAX, NULL);
 	test_putnbr_fd_case("int min", INT_MIN, NULL);
-	test_putnbr_fd_case("03764", 03764, NULL); // ?????
+	test_putnbr_fd_case("3764", 3764, NULL);
 	test_putnbr_fd_case("64643", 64643, NULL);
-	test_putnbr_fd_case("-654623", -654623, NULL);
-	test_putnbr_fd_case("-00623", -00623, NULL);
+	test_putnbr_fd_case("-854623", -854623, NULL);
+	test_putnbr_fd_case("-5623", -5623, NULL);
 }
 
 int	main(void)
 {
-	test_isalpha();
-	test_isdigit();
-	test_isalnum();
-	test_isascii();
-	test_isprint();
-	test_strlen();
-	test_memset(); // i dont know how to test mem functions
-	test_bzero();
+	// test_isalpha();
+	// test_isdigit();
+	// test_isalnum();
+	// test_isascii();
+	// test_isprint();
+	// test_strlen();
+	// test_memset(); // i dont know how to test mem functions
+	// test_bzero();
 	// test_memcpy();
 	// test_memmove();
-	test_strlcpy();
-	test_strlcat();
-	test_toupper();
-	test_tolower();
-	test_strchr(); // confused about return null
-	test_strrchr(); // confused about return null
-	test_strncmp();
+	// test_strlcpy();
+	// test_strlcat();
+	// test_toupper();
+	// test_tolower();
+	// test_strchr(); // confused about return null
+	// test_strrchr(); // confused about return null
+	// test_strncmp();
 	// test_memchr();
-	// test_memcmp(); // not working (i think)
-	test_strnstr();
-	test_atoi();
-	test_calloc();
-	test_strdup();
+	// test_memcmp();
+	// test_strnstr();
+	// test_atoi();
+	// test_calloc();
+	// test_strdup();
+	//
+	// test_substr();
+	// test_strjoin();
+	// test_strtrim();
+	// test_split(); // needs to free in case of error
+	// test_itoa();
+	// test_strmapi();
+	// test_striteri();
+	// test_putchar_fd();
+	// test_putstr_fd();
+	// test_putendl_fd();
+	// test_putnbr_fd();
 
-	test_substr();
-	test_strjoin();
-	test_strtrim();
-	test_split(); // needs to free in case of error
-	test_itoa();
-	test_strmapi();
-	test_striteri();
-	test_putchar_fd();
-	test_putstr_fd();
-	test_putendl_fd();
-	test_putnbr_fd();
+	// test_lst(); // in a different file
 	return (0);
 }

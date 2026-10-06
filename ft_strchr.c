@@ -27,22 +27,3 @@ char	*ft_strchr(const char *s, int c)
 		return (casted_s);
 	return (NULL);
 }
-
-// move this later
-char	*ft_strrchr(const char *s, int c)
-{
-	char	*casted_s;
-	size_t	size;
-
-	casted_s = (char *)s;
-	size = ft_strlen(casted_s) + 1;
-	while (size)
-	{
-		if (casted_s[size] == c)
-			return (&casted_s[size]);
-		size--;
-	}
-	if (casted_s[size] == c)
-		return (&casted_s[size]);
-	return (NULL);
-}

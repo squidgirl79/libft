@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       .       42.fr        */
-/*   ft_toupper.c                                       ":"                   */
+/*                                                       .     codam.nl       */
+/*   test_lst.c                                         ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
-/*                                                  |  O        \___/  |      */
-/*   Created: 2026/10/01 10:58:56 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/05 11:24:04 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*                                                  |  v~       \___/  |      */
+/*   Created: 2026/10/06 16:12:03 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
+/*   Updated: 2026/10/06 16:12:49 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "libft.h"
 
-int	ft_toupper(int c)
+void	test_lst(void)
 {
-	if (c >= 'a' && 'z' >= c)
-		c -= 32;
-	return (c);
+	printf("TESTING LINKED LIST");
 }
