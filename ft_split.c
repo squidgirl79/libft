@@ -12,19 +12,19 @@
 
 #include <stdlib.h>
 #include "libft.h"
-#include <stdio.h>
 
 static size_t	wordlen(char const *s, char c);
 
-static int		loop_s(char const *s, char c, int i);
+static int		loop_s(char const *s, char c);
+
+static char		**free_previous(char **ret, int i);
 
 char	**ft_split(char const *s, char c)
 {
 	char		**ret;
 	int			i;
 
-	i = 0;
-	i = loop_s(s, c, i);
+	i = loop_s(s, c);
 	ret = (char **)malloc((i + 1) * sizeof(char *));
 	if (!ret)
 		return (NULL);
@@ -37,7 +37,7 @@ char	**ft_split(char const *s, char c)
 		{
 			ret[i] = (char *)malloc((wordlen(s, c) + 1) * sizeof(char));
 			if (!ret[i])
-				return (NULL);
+				return (free_previous(ret, i));
 			ft_strlcpy(ret[i++], s, wordlen(s, c) + 1);
 		}
 		s += wordlen(s, c);
@@ -46,8 +46,11 @@ char	**ft_split(char const *s, char c)
 	return (ret);
 }
 
-static int	loop_s(char const *s, char c, int i)
+static int	loop_s(char const *s, char c)
 {
+	int	i;
+
+	i = 0;
 	while (*s)
 	{
 		while (*s == c)
@@ -67,4 +70,14 @@ static size_t	wordlen(char const *s, char c)
 	while (*s && *s++ != c)
 		ret++;
 	return (ret);
+}
+
+static char	**free_previous(char **ret, int i)
+{
+	while (i--)
+	{
+		free(ret[i]);
+	}
+	free(ret);
+	return (NULL);
 }

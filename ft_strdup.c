@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       .       42.fr        */
+/*                                                       .     codam.nl       */
 /*   ft_strdup.c                                        ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
-/*                                                  |  O        \___/  |      */
+/*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/01 13:40:41 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/01 13:40:41 by embrugge       ~   ~   ~   ~   ~   ~     */
+/*   Updated: 2026/10/07 18:09:54 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 char	*ft_strdup(const char *s)
 {
 	const size_t	len = ft_strlen(s);
-	char			*result;
+	char			*ret;
 
-	result = (char *)malloc((len + 1) * sizeof(char));
-	ft_strlcpy(result, s, len + 1);
-	return (result);
+	ret = (char *)malloc((len + 1) * sizeof(char));
+	if (!ret)
+		return (NULL);
+	ft_strlcpy(ret, s, len + 1);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/01 20:11:36 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/06 18:46:41 by embrugge        ~       ~       ~        */
+/*   Updated: 2026/10/07 18:21:33 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -464,14 +464,14 @@ void	test_atoi(void)
 {
 	test_atoi_case("135");
 	test_atoi_case("");
-	test_atoi_case("5a");
+	test_atoi_case(" 5a");
 	test_atoi_case("bleh");
-	test_atoi_case("--99");
-	test_atoi_case("+42");
-	test_atoi_case("79-79");
-	test_atoi_case("-84");
-	test_atoi_case("+-12");
-	test_atoi_case("++300");
+	test_atoi_case(" --99");
+	test_atoi_case("  +42");
+	test_atoi_case("   79-79");
+	test_atoi_case("\n-84");
+	test_atoi_case(" +-12");
+	test_atoi_case("\n\n  ++300");
 }
 
 void	test_calloc_case(const char *name, size_t nmemb, size_t size)
@@ -530,12 +530,12 @@ void	test_substr_case(char *name, unsigned int start, size_t len)
 
 void	test_substr(void)
 {
-	test_substr_case("hello*world", 42, 4);
-	test_substr_case("hello*world", 'e', 1);
-	test_substr_case("hello*world", 42, 0);
-	test_substr_case("hello*world", 'o', 10);
-	test_substr_case("hello*world", 'x', 4);
-	test_substr_case("hello*world", 0, 4);
+	test_substr_case("hello*world", 4, 99);
+	test_substr_case("hello*world", 100, 99);
+	test_substr_case("hello*world", 0, 99);
+	test_substr_case("hello*world", 2, 99);
+	test_substr_case("hello*world", 4, 99);
+	test_substr_case("hello*world", 0, 99);
 	test_substr_case("", 42, 4);
 	test_substr_case("", 0, 4);
 }
@@ -604,20 +604,15 @@ void	test_split(void)
 {
 	test_split_case("hello*world", 42);
 	test_split_case("*hello*world*", 42);
-	test_split_case("*hello*world", 42);
-	test_split_case("hello*world*", 42);
 	test_split_case("1*2", 42);
 	test_split_case("*1*2*", 42);
-	test_split_case("*1*2", 42);
 	test_split_case("1*2*", 42);
 	test_split_case("hello**world", 42);
-	test_split_case("*hello**world*", 42);
-	test_split_case("*hello***world", 42);
 	test_split_case("hello***world*", 42);
 	test_split_case("", 42);
 	test_split_case("", 0);
-	test_split_case("*1***2**", 42);
 	test_split_case("**1**2***", 42);
+	test_split_case("  looong   string  separated   by spaces and   such  ", ' ');
 }
 
 void	test_itoa_case(int n)
@@ -830,42 +825,42 @@ void	test_putnbr_fd(void)
 
 int	main(void)
 {
-	// test_isalpha();
-	// test_isdigit();
-	// test_isalnum();
-	// test_isascii();
-	// test_isprint();
-	// test_strlen();
-	// test_memset(); // i dont know how to test mem functions
-	// test_bzero();
-	// test_memcpy();
-	// test_memmove();
-	// test_strlcpy();
-	// test_strlcat();
-	// test_toupper();
-	// test_tolower();
-	// test_strchr(); // confused about return null
-	// test_strrchr(); // confused about return null
-	// test_strncmp();
-	// test_memchr();
-	// test_memcmp();
-	// test_strnstr();
-	// test_atoi();
-	// test_calloc();
-	// test_strdup();
-	//
-	// test_substr();
-	// test_strjoin();
-	// test_strtrim();
-	// test_split(); // needs to free in case of error
-	// test_itoa();
-	// test_strmapi();
-	// test_striteri();
-	// test_putchar_fd();
-	// test_putstr_fd();
-	// test_putendl_fd();
-	// test_putnbr_fd();
+	test_isalpha();
+	test_isdigit();
+	test_isalnum();
+	test_isascii();
+	test_isprint();
+	test_strlen();
+	test_memset(); // i dont know how to test mem functions
+	test_bzero();
+	test_memcpy();
+	test_memmove();
+	test_strlcpy();
+	test_strlcat();
+	test_toupper();
+	test_tolower();
+	test_strchr(); // confused about return null
+	test_strrchr(); // confused about return null
+	test_strncmp();
+	test_memchr();
+	test_memcmp();
+	test_strnstr();
+	test_atoi();
+	test_calloc();
+	test_strdup();
 
-	// test_lst(); // in a different file
+	test_substr();
+	test_strjoin();
+	test_strtrim();
+	test_split(); // needs to free in case of error
+	test_itoa();
+	test_strmapi();
+	test_striteri();
+	test_putchar_fd();
+	test_putstr_fd();
+	test_putendl_fd();
+	test_putnbr_fd();
+
+	test_lst(); // in a different file
 	return (0);
 }

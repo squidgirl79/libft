@@ -4,9 +4,9 @@
 /*   ft_itoa.c                                          ":"                   */
 /*                                                    ___:____     |"\/"|     */
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
-/*                                                  |  O        \___/  |      */
+/*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/04 14:04:11 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/05 16:56:48 by embrugge         ~     ~     ~     ~     */
+/*   Updated: 2026/10/07 18:11:28 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_itoa(int n)
 	}
 	size = loop_n(n, size, NULL);
 	ret = (char *)ft_calloc(size + sign + 1, sizeof(char));
+	if (!ret)
+		return (NULL);
 	start = ret;
 	if (sign)
 		*ret = '-';

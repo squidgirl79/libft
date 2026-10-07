@@ -14,16 +14,18 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*casted_s;
+	char			*casted_s;
+	unsigned char	casted_c;
 
 	casted_s = (char *)s;
+	casted_c = (unsigned char)c;
 	while (*casted_s)
 	{
-		if (*casted_s == c)
+		if (*casted_s == casted_c)
 			return (casted_s);
 		casted_s++;
 	}
-	if (*casted_s == c)
+	if (*casted_s == casted_c)
 		return (casted_s);
 	return (NULL);
 }

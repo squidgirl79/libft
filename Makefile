@@ -15,14 +15,20 @@ test: $(OBJ) main.c test_lst.c
 run: test
 	./test
 
-all:
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	cc $(CFLAGS) -c $(SRC)
+	ar -rcs $(NAME) $(OBJ)
 
 clean:
 	rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf test
+	rm -rf $(NAME)
 
-re:
+re: fclean all
 
-.PHONY: test, run, all, clean, fclean, re
+bonus: all
+
+.PHONY: test, run, all, clean, fclean, re, bonus
