@@ -6,6 +6,8 @@ OBJ=$(SRC:.c=.o)
 CFLAGS=-g -Wall -Wextra -Werror
 LDFLAGS=-lbsd
 
+all: $(NAME)
+
 %.o: %.c libft.h
 	cc $< -c $(CFLAGS) -o $@
 
@@ -14,8 +16,6 @@ test: $(OBJ) main.c test_lst.c
 
 run: test
 	./test
-
-all: $(NAME)
 
 $(NAME): $(OBJ)
 	cc $(CFLAGS) -c $(SRC)

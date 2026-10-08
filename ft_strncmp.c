@@ -21,7 +21,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	casted_s2 = (unsigned char *)s2;
 	if (!n)
 		return (0);
-	while (casted_s1 && *casted_s2 && n-- - 1)
+	while (*casted_s1 && *casted_s2 && n-- - 1)
 	{
 		if (*casted_s1 != *casted_s2)
 			return (*casted_s1 - *casted_s2);

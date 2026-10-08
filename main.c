@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/01 20:11:36 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/07 18:21:33 by embrugge        ~       ~       ~        */
+/*   Updated: 2026/10/08 16:40:25 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,8 @@ void	test_memcpy_case(char *dest, size_t n, int offset)
 
 void	test_memcpy(void)
 {
-	test_memcpy_case("hello world!", 4, 2);
-	test_memcpy_case("hello world!", 4, -2);
+	test_memcpy_case("", 0, 2);
+	test_memcpy_case("", 0, -2);
 	test_memcpy_case("bleh....", 4, 2);
 	test_memcpy_case("bleh....", 4, -2);
 	test_memcpy_case("abcdefghijk", 5, 3);

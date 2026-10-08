@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \  /      */
 /*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/06 15:31:29 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/07 18:27:58 by embrugge        ~       ~       ~        */
+/*   Updated: 2026/10/08 15:20:48 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
 		f(lst->content);

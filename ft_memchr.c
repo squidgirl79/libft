@@ -19,7 +19,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	casted_ptr = (unsigned char *) s;
 	casted_char = (unsigned char) c;
-	while (n-- && casted_ptr)
+	while (n--)
 		if (*casted_ptr++ == casted_char)
 			return (casted_ptr - 1);
 	return (NULL);

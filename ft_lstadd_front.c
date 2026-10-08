@@ -6,7 +6,7 @@
 /*   By: embrugge <embrugge@student.codam.nl>       ,'        `.    \   /     */
 /*                                                  |  v~       \___/  |      */
 /*   Created: 2026/10/06 14:44:37 by embrugge     ~^~^~^~^~^~^~^~^~^~^~^~^~   */
-/*   Updated: 2026/10/07 18:19:08 by embrugge        ~       ~       ~        */
+/*   Updated: 2026/10/08 15:15:20 by embrugge        ~       ~       ~        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (!new)
+		return ;
 	new->next = *lst;
 	*lst = new;
 }
