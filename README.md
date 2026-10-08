@@ -97,14 +97,14 @@ These are:
 
 Lastly, Libft has 9 functions used to manipulate Linked lists.
 A linked list node is defined as:
-`typedef struct     s_list    `
-`{                            `
-`   void            *content; `
-`   struct s_list   *next;    `
-`}                  t_list;   `
+`typedef struct     s_list    `  
+`{                            `  
+`   void            *content; `  
+`   struct s_list   *next;    `  
+`}                  t_list;   `  
 Where `content` is a pointer to the data contained in the node.
 And `next` is a pointer to the next node in the list, or NULL if this is the last node.
-
+######
 The Linked list functions are as follows:
 
 > `t_list *ft_lstnew(void *content);`
@@ -132,4 +132,8 @@ The official man pages were used when replicating the standard libc functions.
 of information for this project.
 Of course, I couldn't have done this without my peers at Codam.
 
-No AI was used in this project.
+Lastly, no AI was used in this project.
+
+
+
+###### I don't like writing README's, so thank you for reading this far :3
