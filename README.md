@@ -44,9 +44,9 @@ These are:
 > starting from the given index with a given maximum length.
 >
 > Parameters:
-> - s: The original string to create the substring from.
+> - s:     The original string to create the substring from.
 > - start: The starting index of the substring.
-> - len: The maximum length of the substring.  
+> - len:   The maximum length of the substring.  
 >
 > Returns a pointer to the new substring, or NULL on allocation failure.
 
@@ -66,7 +66,7 @@ These are:
 > being taken out of the start and end of the string.
 >
 > Parameters:
-> - s1: The string to trim.
+> - s1:  The string to trim.
 > - set: The characters to be removed.
 >
 > Returns a pointer to the trimmed string, or NULL on allocation failure.
@@ -79,51 +79,180 @@ These are:
 > - s: The string to be split.
 > - c: The delimiting character to split at.
 >
-> Returns a pointer to the array of splitted strings, NULL on allocation failure.
+> Returns a pointer to the array of splitted strings, or NULL on allocation failure.
 
 > `char *ft_itoa(int n);`
+>
+> Allocates memory and returns the given integer as a string.
+>
+> Parameters:
+> - n: The number to be put in a string.
+>
+> Returns a pointer to the created string, or NULL on allocation failure.
 
 > `char *ft_strmapi(char const *s, char (*f)(unsigned int, char));`
+> 
+> Allocates memory and iterates over the given string, passing each character
+> into the given function.
+> 
+> Parameters:
+> - s: The string to be iterated over.
+> - f: The pointer to the function to be applied to each character.
+> 
+> Returns a pointer to the new string, the new string may be a modified version
+> of the original string.
 
 > `void ft_striteri(char *s, void (*f)(unsigned int, char*));`
+>
+> Iterates over the given string, passing each character into  
+> the given function.
+> 
+> Parameters:
+> - s: The string to be iterated over.
+> - f: The pointer to the function to be applied to each character.
+> 
+> No return value, instead the original string may be modified.
 
 > `void ft_putchar_fd(char c, int fd);`
+> 
+> Writes a character to the given file descriptor.
+> 
+> Parameters:
+> - c:  The character to write.
+> - fd: The file descriptor to write to.
+> 
+> No return value.
 
 > `void ft_putstr_fd(char *s, int fd);`
+> 
+> Writes a string to the given file descriptor.
+> 
+> Parameters:
+> - s:  The string to write.
+> - fd: The file descriptor to write to.
+> 
+> No return value.
 
 > `void ft_putendl_fd(char *s, int fd);`
+> 
+> Writes a string to the given file descriptor, followed by a newline.
+> 
+> Parameters:
+> - s:  The string to write.
+> - fd: The file descriptor to write to.
+> 
+> No return value.
 
 > `void ft_putnbr_fd(int n, int fd);`
+> 
+> Writes an integer to the given file descriptor.
+> 
+> Parameters:
+> - n:  The number to write.
+> - fd: The file descriptor to write to.
+> 
+> No return value.
 
-Lastly, Libft has 9 functions used to manipulate Linked lists.
-A linked list node is defined as:
+Lastly, Libft has 9 functions used to manipulate Linked lists.  
+A linked list node is defined as:  
 `typedef struct     s_list    `  
 `{                            `  
 `   void            *content; `  
 `   struct s_list   *next;    `  
 `}                  t_list;   `  
-Where `content` is a pointer to the data contained in the node.
+Where `content` is a pointer to the data contained in the node.  
 And `next` is a pointer to the next node in the list, or NULL if this is the last node.
 ######
-The Linked list functions are as follows:
+The Linked list functions are as follows:  
 
-> `t_list *ft_lstnew(void *content);`
+> `t_list *ft_lstnew(void *content);`  
+> 
+> Creates a new list node with the given content.  
+> 
+> Parameters:  
+> - content: A pointer to the data to be stored.  
+> 
+> Returns a pointer to the created list. `next` is set to NULL.  
 
-> `void ft_lstadd_front(t_list **lst, t_list *new);`
+> `void ft_lstadd_front(t_list **lst, t_list *new);`  
+> 
+> Adds a node to the front of a given list.  
+> 
+> Parameters:  
+> - lst: The address of a pointer to the first node in the list.  
+> - new: The node to add to the front.  
+> 
+> No return value. The pointer to the first node is changed to point to the added node.  
 
-> `int ft_lstsize(t_list *lst);`
+> `int ft_lstsize(t_list *lst);`  
+> 
+> Counts the amount of nodes in a given list.  
+> 
+> Parameters:  
+> - lst: The list to count.  
+> 
+> Returns the size of the list.  
 
-> `t_list *ft_lstlast(t_list *lst);`
+> `t_list *ft_lstlast(t_list *lst);`  
+> 
+> Finds the last node in a given list.  
+> 
+> Parameters:  
+> - lst: The list to search.  
+> 
+> Returns a pointer to the last node of the list.  
 
-> `void ft_lstadd_back(t_list **lst, t_list *new);`
+> `void ft_lstadd_back(t_list **lst, t_list *new);`  
+> 
+> Adds a node to the end of a given list.  
+> 
+> Parameters:  
+> - lst: The address of a pointer to the first node in the list.  
+> - new: The node to add to the end.  
+> 
+> No return value.    
 
-> `void ft_lstdelone(t_list *lst, void (*del)(void*));`
+> `void ft_lstdelone(t_list *lst, void (*del)(void*));`  
+> 
+> Removes the content of a given list node using a given function.  
+> 
+> Parameters:  
+> - lst: The node to be deleted.  
+> - del: The pointer to the function to remove the content with.  
+> 
+> No return value. The node is freed after the content is removed.  
 
-> `void ft_lstclear(t_list **lst, void (*del)(void*));`
+> `void ft_lstclear(t_list **lst, void (*del)(void*));`  
+> 
+> Removes the content of an entire list using a given function.  
+> 
+> Parameters:  
+> - lst: The address of a pointer to the first node in the list.  
+> - del: The pointer to the function to remove the content with.  
+> 
+> No return value. All nodes are freed after the content is removed.  
 
-> `void ft_lstiter(t_list *lst, void (*f)(void *));`
+> `void ft_lstiter(t_list *lst, void (*f)(void *));`  
+> 
+> Iterates through the given list, applying the given function to each node's content.  
+> 
+> Parameters:  
+> - lst: The list to be iterated on.  
+> - f:   The pointer to the function to apply to each node's content.  
+> 
+> No return value, instead the content of each node may be modified.  
 
-> `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));`
+> `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));`  
+> 
+> Iterates through the given list, applying the given function to  
+each node's content, and allocating a new list.  
+> 
+> Parameters:  
+> - lst: The list to be iterated on.  
+> - f:   The pointer to the function to apply to each node's content.  
+> - del: The pointer to the function to remove a node's content with if needed.  
+> 
+> Returns a pointer to the created list. NULL on allocation failure.  
 
 **Resources**
 
