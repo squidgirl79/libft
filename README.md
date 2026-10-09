@@ -25,6 +25,10 @@ If you also wish to remove the libft.a archive, run:
 To remove and recompile everything, run:
 > `make re`
 
+To access and use these functions in your own project, write:  
+> `#include "libft.h"`  
+at the top of your file.
+
 **Details**
 
 Libft consists of 23 standard libc functions, replicating their original behaviour.

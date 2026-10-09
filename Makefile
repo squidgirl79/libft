@@ -3,7 +3,7 @@ SRC=ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_i
 NAME=libft.a
 OBJ=$(SRC:.c=.o)
 
-CFLAGS=-g -Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror
 LDFLAGS=-lbsd
 
 all: $(NAME)
@@ -11,15 +11,8 @@ all: $(NAME)
 %.o: %.c libft.h
 	cc $< -c $(CFLAGS) -o $@
 
-test: $(OBJ) main.c test_lst.c
-	cc $(OBJ) main.c test_lst.c $(CFLAGS) $(LDFLAGS) -o $@
-
-run: test
-	./test
-
 $(NAME): $(OBJ)
-	cc $(CFLAGS) -c $(SRC)
-	ar -rcs $(NAME) $(OBJ)
+	ar -r $(NAME) $(OBJ)
 
 clean:
 	rm -rf $(OBJ)
@@ -29,6 +22,10 @@ fclean: clean
 
 re: fclean all
 
-bonus: all
+# test: $(OBJ) main.c test_lst.c
+# 	cc $(OBJ) main.c test_lst.c $(CFLAGS) $(LDFLAGS) -o $@
+#
+# run: test
+# 	./test
 
-.PHONY: test, run, all, clean, fclean, re, bonus
+.PHONY: all, clean, fclean, re, test, run
