@@ -26,9 +26,9 @@ To remove and recompile everything, run:
 > `make re`
 
 To access and use these functions in your own project, write:  
-> `#include "libft.h"`
+> `#include "path/to/libft.h"`  
 
-at the top of your file.
+at the top of your file. Then compile your project with `path/to/libft.a` after building the library.  
 
 **Details**
 
